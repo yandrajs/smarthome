@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTE | About</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- FontAwesome CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  <!-- Logo -->
+  <link type="image/png" sizes="96x96" rel="icon" href="assets/logo.png">
+  <style>
+    body {
+      background: #102542;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 60px;
+    }
+
+    .navbar {
+      background: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(2px);
+      margin-bottom: 20px;
+    }
+
+    .navbar-brand {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .navbar-brand i {
+      color: #f87060;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22' /%3E%3C/svg%3E");
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      color: #fff;
+    }
+
+    .card i {
+      color: #f87060;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-home"></i> Here There Everywhere
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 mb-4 mx-auto">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              <i class="fas fa-user-circle"></i> About Me
+            </h5>
+            <img src="assets/yandra.jpeg" alt="Profile Picture" class="rounded-circle img-thumbnail mb-3"
+              style="width: 150px; height: 150px;" />
+            <p class="card-text">
+              Pelajar dengan minat yang tinggi di bidang teknologi.
+            </p>
+
+            <div class="d-flex justify-content-center mb-3">
+              <!-- GitHub Icon -->
+              <a href="https://github.com/yandra21" class="btn btn-outline-light mx-2">
+                <i class="fab fa-github"></i>
+              </a>
+
+              <!-- LinkedIn Icon -->
+              <a href="https://id.linkedin.com/in/yandra-jafar-sidiq-714770352" class="btn btn-outline-light mx-2">
+                <i class="fab fa-linkedin"></i>
+              </a>
+
+              <!-- Instagram Icon -->
+              <a href="https://instagram.com/y.jafarsidiq" class="btn btn-outline-light mx-2">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- About Section -->
+      <h3 class="about-title text-center mb-3">About Here There Everywhere (HTE)</h3>
+
+      <div class="about-content">
+        <p>
+          Website "Here There Everywhere" adalah platform Internet of Things (IoT) yang terinspirasi dari lagu
+          legendaris The
+          Beatles. Pemilihan judul "Here There Everywhere" untuk website ini sangat tepat karena mencerminkan kemampuan
+          platform IoT
+          yang dapat diakses kapan saja dan di mana saja. Makna ini sesuai dengan konsep IoT yang menghubungkan
+          perangkat dan pengguna dimanapun.
+        </p>
+        <p>
+          Website ini dibangun menggunakan teknologi web modern, termasuk HTML untuk struktur halaman, CSS untuk desain
+          dan tata
+          letak, JavaScript untuk interaktivitas, Bootstrap untuk komponen responsif, dan Chart.js untuk visualisasi
+          data yang
+          dinamis serta firebase untuk penyimpanan data secara realtime.
+        </p>
+        <p>
+          Pada sisi perangkat keras, website ini memanfaatkan micro controller ESP8266 untuk konektivitas Wi-Fi, modul
+          DHT11 untuk
+          pengukuran suhu dan kelembapan, sensor ultrasonik untuk pengukuran jarak, serta LED sebagai indikator visual.
+          Hubungan
+          antara perangkat keras dan perangkat lunak ini memungkinkan pengguna untuk memantau dan mengendalikan
+          perangkat IoT
+          secara efisien melalui antarmuka web yang user friendly.
+        </p>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

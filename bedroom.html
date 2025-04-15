@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTE | Bedroom</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Logo -->
+    <link type="image/png" sizes="96x96" rel="icon" href="assets/logo.png" />
+
+    <style>
+      body {
+        background: #102542;
+        color: #fff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        padding-top: 60px;
+      }
+
+      .navbar {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(2px);
+        margin-bottom: 20px;
+      }
+
+      .navbar-brand {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      .navbar-brand i {
+        color: #f87060;
+      }
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22' /%3E%3C/svg%3E");
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 10px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        color: #fff;
+      }
+
+      .menu:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .menu-info i {
+        color: #f87060;
+      }
+
+      .card a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .card i {
+        color: #f87060;
+      }
+
+      strong {
+        font-size: 0.7rem;
+        font-weight: 900;
+      }
+
+      .container {
+        padding-top: 20px;
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #f87060;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      #led-indicator {
+        color: grey;
+      }
+
+      .chart {
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+          <i class="fas fa-home"></i> Here There Everywhere
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+      <!-- Room and State Database -->
+      <div class="d-flex justify-content-between mb-3">
+        <div class="menu-info">
+          <i class="h4 fas fa-bed"></i> <span class="h4">Bedroom</span>
+        </div>
+        <div class="state-database my-auto">
+          <span class="fas fa-circle text-secondary" id="state-icon"></span>
+          <span id="state-label">Not Connected</span>
+        </div>
+      </div>
+
+      <!-- TEMPERATURE DOOR START -->
+      <div class="col md-4 mb-4 mx-auto">
+        <div class="card text-center">
+          <div class="card-body">
+            <i class="fas fa-door-closed fa-3x mb-3"></i>
+            <h5 class="card-title">Door</h5>
+            <p class="card-text">
+              There is someone at the door: <span id="nilaiJarak">null</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- TEMPERATURE DOOR END -->
+
+      <div class="row d-flex justify-content-around">
+        <!-- TEMPERATURE CARD START -->
+        <div class="col-12 col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title text-center">
+                <i class="fas fa-thermometer-half"></i> Temperature
+              </h5>
+              <h2 class="card-text text-center" id="temperature">null</h2>
+              <div class="row justify-content-center">
+                <div class="col-4">
+                  <p class="text-center">
+                    <strong>Lowest</strong><br /><span id="lowest-temp"
+                      >null</span
+                    >
+                  </p>
+                </div>
+                <div class="col-4">
+                  <p class="text-center">
+                    <strong>Highest</strong><br /><span id="highest-temp"
+                      >null</span
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- TEMPERATURE CARD END -->
+
+        <!-- HUMIDITY CARD START -->
+        <div class="col-12 col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body mt-auto">
+              <h5 class="card-title text-center">
+                <i class="fas fa-tint"></i> Humidity
+              </h5>
+              <h2 class="card-text text-center" id="humidity">null</h2>
+              <div class="row justify-content-center">
+                <div class="col-4">
+                  <p class="text-center">
+                    <strong>Lowest</strong><br /><span id="lowest-humid"
+                      >null</span
+                    >
+                  </p>
+                </div>
+                <div class="col-4">
+                  <p class="text-center">
+                    <strong>Highest</strong><br /><span id="highest-humid"
+                      >null</span
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- HUMIDITY CARD END -->
+
+        <!-- LED CARD START -->
+        <div class="col-12 col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title text-center">
+                <i class="fas fa-lightbulb"></i> Led Control
+              </h5>
+              <h2 class="card-text text-center">
+                <i class="fas fa-lightbulb" id="led-indicator"></i>
+              </h2>
+              <div class="row d-flex justify-content-center">
+                <!-- LED Toggle Switch -->
+                <div class="d-flex justify-content-center">
+                  <label class="switch">
+                    <input
+                      type="checkbox"
+                      id="bedroom-led"
+                      onclick="toggleLED()"
+                    />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="text-center mt-2">
+                  <span id="led-status" class="badge bg-secondary">Off</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- LED CARD END -->
+
+        <div class="container">
+          <div class="row">
+            <!-- Chart Temperature -->
+            <div class="col-12 col-md-6 mb-4">
+              <div class="chart bg-dark">
+                <canvas
+                  id="tempChart"
+                  style="width: 100%; max-width: 700px; margin: auto"
+                ></canvas>
+              </div>
+            </div>
+
+            <!-- Chart Humidity -->
+            <div class="col-12 col-md-6 mb-4">
+              <div class="chart bg-dark">
+                <canvas
+                  id="humidChart"
+                  style="width: 100%; max-width: 700px; margin: auto"
+                ></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="module">
+      // fungsi module ini supaya di private
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        onValue,
+        update,
+      } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDHuXODpB5mltmeubwfEl8Z6NjyTOHX6NI",
+        authDomain: "ukk-020101160917.firebaseapp.com",
+        databaseURL:
+          "https://ukk-020101160917-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "ukk-020101160917",
+        storageBucket: "ukk-020101160917.firebasestorage.app",
+        messagingSenderId: "868900262060",
+        appId: "1:868900262060:web:4675d45ef05385e2d88f09",
+      };
+
+      // inisialisasi firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const ledRef = ref(db, "ledState");
+      const tempRef = ref(db, "dataDHT/temperature");
+      const humidRef = ref(db, "dataDHT/humidity");
+      const usRef = ref(db, "dataUS");
+
+      // Menyiapkan data untuk chart
+      let tempData = {
+        labels: [0], // Label untuk waktu
+        datasets: [
+          {
+            label: "Temperature Data (°C)", // Label data
+            data: [0], // Data awal
+            borderColor: "#ff6f61", // Warna garis
+            backgroundColor: "rgba(255, 111, 97, 0.2)", // Background garis
+            borderWidth: 2, // Menambahkan ketebalan garis
+            lineTension: 0.4, // Menambahkan kelengkungan pada garis
+            pointRadius: 4, // Menambahkan titik di atas grafik
+            pointBackgroundColor: "#ff6f61", // Warna titik
+            fill: true, // Mengisi area di bawah garis dengan warna
+          },
+        ],
+      };
+
+      // Konfigurasi chart
+      let tempConfig = {
+        type: "line", // Tipe chart
+        data: tempData, // Mengisi data dengan variabel tempData
+      };
+
+      // Membuat chart
+      let tempChart = new Chart(
+        document.getElementById("tempChart"),
+        tempConfig
+      );
+
+      // Fungsi untuk memperbarui grafik dengan data baru
+      function updateTempChart(temperature) {
+        let now = new Date(); // Membuat objek waktu saat ini
+
+        // Membuat format waktu: jam:menit:detik
+        let hours = String(now.getHours()).padStart(2, "0"); // Membuat waktu secara real time sesuai dengan waktu saat ini dengan memastikan panjang 2 digit dan menambahkan angka nol di depan jika satu digit
+        let minutes = String(now.getMinutes()).padStart(2, "0"); // Membuat waktu secara real time sesuai dengan waktu saat ini dengan memastikan panjang 2 digit dan menambahkan angka nol di depan jika satu digit
+        let seconds = String(now.getSeconds()).padStart(2, "0"); // Membuat waktu secara real time sesuai dengan waktu saat ini dengan memastikan panjang 2 digit dan menambahkan angka nol di depan jika satu digit
+
+        // Membuat string waktu sesuai format waktu: jam:menit:detik
+        let formattedTime = `${hours}:${minutes}:${seconds}`;
+
+        // Menambahkan label waktu dan data suhu ke grafik
+        tempData.labels.push(formattedTime);
+        tempData.datasets[0].data.push(temperature);
+
+        // Jika jumlah data sudah lebih dari 5, hapus data terlama agar grafik tidak terlalu panjang
+        if (tempData.labels.length > 5) {
+          tempData.labels.shift(); // Menghapus label waktu pertama
+          tempData.datasets[0].data.shift(); // Menghapus data suhu pertama
+        }
+
+        // Memperbarui grafik
+        tempChart.update();
+      }
+
+      // Temperature start
+      // onValue () digunakan untuk mendengarkan perubahan data dan snapshot callback yang akan dilankan setiap ada perubahan data
+      onValue(
+        tempRef,
+        (snapshot) => {
+          if (snapshot.exists()) {
+            // Ketika data tidak kosong maka perintah ini dijalankan
+            const data = snapshot.val();
+            let temperature = data.temperature;
+            let highestTemperature = data.highestTemperature;
+            let lowestTemperature = data.lowestTemperature;
+            console.log("Temperature update", temperature);
+            console.log("Highest Tperature update", highestTemperature);
+            console.log("Lowest Temperature update", lowestTemperature);
+
+            // Mengambil element HTML dengan id
+            const statusElement = document.getElementById("state-label");
+            const statusIconElement = document.getElementById("state-icon");
+            const temperatureElement = document.getElementById("temperature");
+            const highestTempElement = document.getElementById("highest-temp");
+            const lowestTempElement = document.getElementById("lowest-temp");
+
+            // Update temperature
+            temperatureElement.innerHTML = `<span>${temperature}&deg;C</span>`;
+            highestTempElement.innerHTML = `<span>${highestTemperature}&deg;C</span>`;
+            lowestTempElement.innerHTML = `<span>${lowestTemperature}&deg;C</span>`;
+
+            statusElement.innerHTML = `Connected`;
+            statusIconElement.classList.remove("text-secondary");
+            statusIconElement.classList.add("text-success");
+            console.log("Connect to database");
+            // Update grafik suhu
+            updateTempChart(temperature); // Memanggil fungsi untuk memperbarui grafik dengan suhu terbaru
+          } else {
+            // Ketika data kosong atau 0 maka pesan ini dijalankan
+            console.log("Data temperature does not exist");
+          }
+        },
+        (error) => {
+          // Jika error pesan ini yang dijalankan
+          console.log("Error reading temperature data");
+        }
+      );
+      // Temperature end
+
+      // Data untuk chart humidity
+      let humidData = {
+        labels: [0],
+        datasets: [
+          {
+            label: "Humidity Data (%)", // Label data
+            data: [0], // Data awal
+            borderColor: "#007bff", // Warna garis untuk humidity
+            backgroundColor: "rgba(0, 123, 255, 0.2)", // Background garis dengan transparansi
+            borderWidth: 2, // Menambahkan ketebalan garis
+            lineTension: 0.4, // Menambahkan kelengkungan pada garis
+            pointRadius: 4, // Menambahkan titik di atas grafik
+            pointBackgroundColor: "#007bff", // Warna titik yang lebih cerah
+            fill: true, // Mengisi area di bawah garis dengan warna
+          },
+        ],
+      };
+
+      // Konfigurasi chart
+      let humidConfig = {
+        type: "line",
+        data: humidData,
+      };
+
+      // Membuat chart humidity
+      let humidChart = new Chart(
+        document.getElementById("humidChart"),
+        humidConfig
+      );
+
+      function updateHumidityChart(humidity) {
+        let now = new Date();
+
+        let hours = String(now.getHours()).padStart(2, "0");
+        let minutes = String(now.getMinutes()).padStart(2, "0");
+        let seconds = String(now.getSeconds()).padStart(2, "0");
+
+        let formattedTime = `${hours}:${minutes}:${seconds}`;
+
+        // Menambahkan label waktu dan data kelembapan ke grafik
+        humidData.labels.push(formattedTime);
+        humidData.datasets[0].data.push(humidity);
+
+        // Jika jumlah data sudah lebih dari 5, hapus data terlama agar grafik tidak terlalu panjang
+        if (humidData.labels.length > 5) {
+          humidData.labels.shift(); // Menghapus label pertama (waktu pertama)
+          humidData.datasets[0].data.shift(); // Menghapus data kelembapan pertama
+        }
+
+        // Memperbarui grafik
+        humidChart.update();
+      }
+
+      // Humidity start
+      onValue(
+        humidRef,
+        (snapshot) => {
+          if (snapshot.exists()) {
+            // ketika data tidak kosong maka perintah ini dijalankan
+            const data = snapshot.val();
+            let humidity = data.humidity;
+            let highestHumidity = data.highestHumidity;
+            let lowestHumidity = data.lowestHumidity;
+            console.log("Humidity update", humidity);
+            console.log("Highest Humidity update", highestHumidity);
+            console.log("Lowest Humidity update", lowestHumidity);
+
+            // Memanggil element html dengan id
+            const humidityElement = document.getElementById("humidity");
+            const highestHumidElement =
+              document.getElementById("highest-humid");
+            const lowestHumidElement = document.getElementById("lowest-humid");
+
+            // Update humidity
+            humidityElement.innerHTML = `<span>${humidity}%</span>`;
+            highestHumidElement.innerHTML = `<span>${highestHumidity}%</span>`;
+            lowestHumidElement.innerHTML = `<span>${lowestHumidity}%</span>`;
+            updateHumidityChart(humidity);
+          } else {
+            // Ketika data kosong atau 0 maka pesan ini dijalankan
+            console.log("Data humidity does not exist");
+          }
+        },
+        (error) => {
+          // Jika error pesan ini yang dijalankan
+          console.log("Error reading humidity data");
+        }
+      );
+      // Humidity end
+
+      // Ultrasonic start
+      onValue(usRef, (snapshot) => {
+        if (snapshot.exists()) {
+          // Jika data tidak kosong maka perintah ini dijalankan
+          const data = snapshot.val(); // Mengambil data
+          let nilaiJarak = data.distance;
+          console.log("Distance changes", nilaiJarak);
+
+          const jarakElement = document.getElementById("nilaiJarak");
+          jarakElement.innerHTML = `${nilaiJarak} CM`;
+        } else {
+          console.log("Data ultrasonic does not exist");
+        }
+      });
+      // Ultrasonic end
+
+      // Led start
+      onValue(ledRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const led = snapshot.val();
+          const toggleLED = document.getElementById("bedroom-led");
+          const statusLabel = document.getElementById("led-status");
+          const indicatorLabel = document.getElementById("led-indicator");
+          toggleLED.checked = led.bedRoomLed === 1;
+          console.log("The bedroom status LED has changed", led);
+          // Label status led on / off
+          if (toggleLED.checked) {
+            statusLabel.textContent = "On";
+            statusLabel.style.color = "#fff";
+            statusLabel.classList.add("bg-success");
+            indicatorLabel.style.color = "#f87060";
+          } else {
+            statusLabel.textContent = "Off";
+            statusLabel.classList.remove("bg-success");
+            indicatorLabel.style.color = "grey";
+          }
+        } else {
+          console.log("Data LED does not exist");
+        }
+      });
+
+      // Window fungsinya mengubah yang tadinya private menjadi public
+      window.toggleLED = () => {
+        const ledState = document.getElementById("bedroom-led").checked ? 1 : 0;
+        update(ledRef, {
+          bedRoomLed: ledState,
+        })
+          .then(() => console.log("LED state updated in Firebase"))
+          .catch(() => console.log("Failed to update LED state"));
+      };
+      // Led end
+    </script>
+  </body>
+</html>
